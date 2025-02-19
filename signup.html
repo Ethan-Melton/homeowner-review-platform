@@ -50,21 +50,24 @@
     </div>
   </section>
 
-  <!-- Firebase SDKs for Authentication -->
+  
   <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-auth-compat.js"></script>
+
   <script>
-   const firebaseConfig = {
-  apiKey: "AIzaSyBknAFTGBtJFEa8eFsMf3cqfzgbYlPm5H8",
-  authDomain: "homeowner-review-platfor-dda10.firebaseapp.com",
-  projectId: "homeowner-review-platfor-dda10",
-  storageBucket: "homeowner-review-platfor-dda10.firebasestorage.app",
-  messagingSenderId: "771846627983",
-  appId: "1:771846627983:web:8648f0d6cb488837b686fa",
-  measurementId: "G-E3R19TYZ8K"
-};
+    const firebaseConfig = {
+      apiKey: "AIzaSyBknAFTGBtJFEa8eFsMf3cqfzgbYlPm5H8",
+      authDomain: "homeowner-review-platfor-dda10.firebaseapp.com",
+      projectId: "homeowner-review-platfor-dda10",
+      storageBucket: "homeowner-review-platfor-dda10.appspot.com", 
+      messagingSenderId: "771846627983",
+      appId: "1:771846627983:web:8648f0d6cb488837b686fa",
+      measurementId: "G-E3R19TYZ8K"
+    };
+
     firebase.initializeApp(firebaseConfig);
     const auth = firebase.auth();
+
 
     document.getElementById('signupForm').addEventListener('submit', async (e) => {
       e.preventDefault();
