@@ -56,16 +56,20 @@
     firebase.initializeApp(firebaseConfig);
     const auth = firebase.auth();
 
-    // Login Form Handling
-    document.getElementById('loginForm').addEventListener('submit', async (e) => {
+    document.getElementById('signupForm').addEventListener('submit', async (e) => {
       e.preventDefault();
-      const email = document.getElementById('loginEmail').value;
-      const password = document.getElementById('loginPassword').value;
-
+      const subscriberName = document.getElementById('subscriberName').value;
+      const companyName = document.getElementById('companyName').value;
+      const email = document.getElementById('signupEmail').value;
+      const username = document.getElementById('usernameSignUp').value;
+      const password = document.getElementById('passwordSignUp').value;
+      const subscriptionLevel = document.getElementById('subscriptionLevel').value;
+      const paymentInfo = document.getElementById('paymentInfo').value;
       try {
-        await auth.signInWithEmailAndPassword(email, password);
-        alert('Login successful!');
-        window.location.href = 'dashboard.html'; // Redirect to dashboard page
+        const userCredential = await auth.createUserWithEmailAndPassword(email, password);
+        // Here you would save additional user data (subscriberName, companyName, username, subscriptionLevel, paymentInfo) to your database
+        alert('Sign-up successful! Please log in.');
+        window.location.href = 'login.html';
       } catch (error) {
         alert('Error: ' + error.message);
       }
