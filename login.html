@@ -36,31 +36,36 @@
     </div>
   </section>
 
+  <!-- Firebase SDKs for Authentication -->
   <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-auth-compat.js"></script>
 
   <script>
+    // Corrected Firebase Configuration
     const firebaseConfig = {
       apiKey: "AIzaSyBknAFTGBtJFEa8eFsMf3cqfzgbYlPm5H8",
       authDomain: "homeowner-review-platfor-dda10.firebaseapp.com",
       projectId: "homeowner-review-platfor-dda10",
-      storageBucket: "homeowner-review-platfor-dda10.appspot.com", 
+      storageBucket: "homeowner-review-platfor-dda10.appspot.com", // Fixed this line
       messagingSenderId: "771846627983",
       appId: "1:771846627983:web:8648f0d6cb488837b686fa",
       measurementId: "G-E3R19TYZ8K"
     };
 
+    // Initialize Firebase
     firebase.initializeApp(firebaseConfig);
     const auth = firebase.auth();
 
+    // Login Form Handling
     document.getElementById('loginForm').addEventListener('submit', async (e) => {
       e.preventDefault();
       const email = document.getElementById('loginEmail').value;
       const password = document.getElementById('loginPassword').value;
+
       try {
         await auth.signInWithEmailAndPassword(email, password);
         alert('Login successful!');
-        window.location.href = 'dashboard.html'; // redirect to dashboard page
+        window.location.href = 'dashboard.html'; // Redirect to dashboard page
       } catch (error) {
         alert('Error: ' + error.message);
       }
@@ -68,3 +73,4 @@
   </script>
 </body>
 </html>
+
