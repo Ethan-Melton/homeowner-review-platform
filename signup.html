@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Sign Up - Homeowner Review Platform</title>
+  <title>Login - Homeowner Review Platform</title>
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet" />
@@ -17,72 +17,55 @@
       <h1 class="text-2xl font-bold">Homeowner Review Platform</h1>
       <nav>
         <a href="index.html" class="px-4 hover:underline">Home</a>
-        <a href="login.html" class="px-4 hover:underline">Login</a>
+        <a href="signup.html" class="px-4 hover:underline">Sign Up</a>
       </nav>
     </div>
   </header>
 
   <section class="container mx-auto px-4 py-12">
     <div class="bg-white rounded-lg shadow-lg p-8 max-w-md mx-auto">
-      <h2 class="text-2xl font-semibold text-indigo-700 mb-6 text-center">Sign Up</h2>
-      <form id="signupForm">
-        <label for="subscriberName">Subscriber Name</label>
-        <input type="text" id="subscriberName" class="border p-2 rounded w-full" required />
-        <label for="companyName">Company Name</label>
-        <input type="text" id="companyName" class="border p-2 rounded w-full" required />
-        <label for="signupEmail">Email</label>
-        <input type="email" id="signupEmail" class="border p-2 rounded w-full" required />
-        <label for="usernameSignUp">Username</label>
-        <input type="text" id="usernameSignUp" class="border p-2 rounded w-full" required />
-        <label for="passwordSignUp">Password</label>
-        <input type="password" id="passwordSignUp" class="border p-2 rounded w-full" required />
-        <label for="subscriptionLevel">Subscription Level</label>
-        <select id="subscriptionLevel" class="border p-2 rounded w-full" required>
-          <option value="basic">Basic</option>
-          <option value="premium">Premium</option>
-          <option value="enterprise">Enterprise</option>
-        </select>
-        <label for="paymentInfo">Payment Information</label>
-        <input type="text" id="paymentInfo" class="border p-2 rounded w-full" placeholder="Card details (demo)" required />
-        <button type="submit" class="bg-indigo-700 text-white py-2 rounded mt-4 hover:bg-indigo-800 w-full">Sign Up</button>
+      <h2 class="text-2xl font-semibold text-indigo-700 mb-6 text-center">Login</h2>
+      <form id="loginForm">
+        <label for="loginEmail">Email</label>
+        <input type="email" id="loginEmail" class="border p-2 rounded w-full" required />
+        <label for="loginPassword">Password</label>
+        <input type="password" id="loginPassword" class="border p-2 rounded w-full" required />
+        <button type="submit" class="bg-indigo-700 text-white py-2 rounded mt-4 hover:bg-indigo-800 w-full">Login</button>
       </form>
-      <p class="text-center mt-4">Already have an account? <a href="login.html" class="text-indigo-700 hover:underline">Login</a></p>
+      <p class="text-center mt-4">Don't have an account? <a href="signup.html" class="text-indigo-700 hover:underline">Sign Up</a></p>
     </div>
   </section>
 
-  
+  <!-- Firebase SDKs for Authentication -->
   <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-auth-compat.js"></script>
 
   <script>
+    // Corrected Firebase Configuration
     const firebaseConfig = {
       apiKey: "AIzaSyBknAFTGBtJFEa8eFsMf3cqfzgbYlPm5H8",
       authDomain: "homeowner-review-platfor-dda10.firebaseapp.com",
       projectId: "homeowner-review-platfor-dda10",
-      storageBucket: "homeowner-review-platfor-dda10.appspot.com", 
+      storageBucket: "homeowner-review-platfor-dda10.appspot.com", // Fixed this line
       messagingSenderId: "771846627983",
       appId: "1:771846627983:web:8648f0d6cb488837b686fa",
       measurementId: "G-E3R19TYZ8K"
     };
 
+    // Initialize Firebase
     firebase.initializeApp(firebaseConfig);
     const auth = firebase.auth();
 
-
-    document.getElementById('signupForm').addEventListener('submit', async (e) => {
+    // Login Form Handling
+    document.getElementById('loginForm').addEventListener('submit', async (e) => {
       e.preventDefault();
-      const subscriberName = document.getElementById('subscriberName').value;
-      const companyName = document.getElementById('companyName').value;
-      const email = document.getElementById('signupEmail').value;
-      const username = document.getElementById('usernameSignUp').value;
-      const password = document.getElementById('passwordSignUp').value;
-      const subscriptionLevel = document.getElementById('subscriptionLevel').value;
-      const paymentInfo = document.getElementById('paymentInfo').value;
+      const email = document.getElementById('loginEmail').value;
+      const password = document.getElementById('loginPassword').value;
+
       try {
-        const userCredential = await auth.createUserWithEmailAndPassword(email, password);
-        // Here you would save additional user data (subscriberName, companyName, username, subscriptionLevel, paymentInfo) to your database
-        alert('Sign-up successful! Please log in.');
-        window.location.href = 'login.html';
+        await auth.signInWithEmailAndPassword(email, password);
+        alert('Login successful!');
+        window.location.href = 'dashboard.html'; // Redirect to dashboard page
       } catch (error) {
         alert('Error: ' + error.message);
       }
